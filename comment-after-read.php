@@ -1,9 +1,10 @@
 <?php
 /**
 * Plugin Name: Comment After Read
-* Description: Lets readers to comment on your posts only after a certain amount of time
+* Description: Lets readers to comment on your posts only after a certain amount of time. Plugin from <a href="https://www.cryptlife.com">CryptLife</a> and <a href="http://invuil.com">Invuil</a>.
 * Author: Arjun, Avinash
 * Version: 1.0
+* License: GPL2
 */
 include("comment-after-read-admin.php");
 
