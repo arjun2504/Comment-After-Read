@@ -1,10 +1,17 @@
 var wpcar_waitSeconds = 60;
+
 jQuery(document).ready(function() {
+	
 	var wpcar_post_comment_button = "form#commentform .form-submit #submit";
 	jQuery(wpcar_post_comment_button).attr('disabled','disabled');
+
+	wpcar_disableTimer();
+
 	var wpcar_buttonText = jQuery(wpcar_post_comment_button).val();
 	
-	wpcar_waitSeconds = wpcar_buttonText.match(/\d+/)[0];
+	if(wpcar_buttonText != null) {
+		wpcar_waitSeconds = wpcar_buttonText.match(/\d+/)[0];
+	}
 	
 	setInterval(function() {
 		
@@ -21,3 +28,11 @@ jQuery(document).ready(function() {
 
 	}, 1000);
 });
+
+function wpcar_disableTimer() {
+	if( jQuery('#_wpcar_autotime_limit').prop('checked') ) {
+		jQuery('#_wpcar_maxtime_limit').attr('readonly', 'readonly');
+	} else {
+		jQuery('#_wpcar_maxtime_limit').removeAttr('readonly');
+	}
+}
