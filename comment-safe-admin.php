@@ -24,7 +24,7 @@ class CommentSafeAdmin {
 		
 		add_meta_box(
             '_wpcar_box',
-            __( 'Comment Timer', '_wpcar_box' ),
+            __( 'CommentSafe', '_wpcar_box' ),
             array($this, 'post_specific_box')
         );
 	}
