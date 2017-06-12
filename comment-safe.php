@@ -6,9 +6,9 @@
 * Version: 1.0
 * License: GPL2
 */
-include("comment-after-read-admin.php");
+include("comment-safe-admin.php");
 
-class CommmentAfterRead {
+class CommmentSafe {
 
 	private $is_single = false;
 	private $defaultSettings = [];
@@ -19,7 +19,7 @@ class CommmentAfterRead {
 	public function __construct() {
 		$this->defaultSettings['wpm'] = 275;
 
-		$this->options = new CommentAfterReadAdmin();
+		$this->options = new CommentSafeAdmin();
 
 		register_activation_hook( __FILE__, array($this, 'set_defaults') );
 		
@@ -90,4 +90,4 @@ class CommmentAfterRead {
 
 }
 
-new CommmentAfterRead();
+new CommmentSafe();

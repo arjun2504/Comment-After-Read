@@ -1,6 +1,6 @@
 <?php
 
-class CommentAfterReadAdmin {
+class CommentSafeAdmin {
 
 	public function __construct() {
 		add_action('admin_menu', array( $this, 'wpcar_add_menu' ) );
@@ -65,7 +65,7 @@ class CommentAfterReadAdmin {
 			if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 		}
 
-		$disable_timer = sanitize_text_field( $_POST['_wpcar_autotime_limit'] );
+		$disable_timer = $_POST['_wpcar_autotime_limit'];
 		$max_limit = sanitize_text_field( $_POST['_wpcar_maxtime_limit'] );
 
 		update_post_meta( $post_id, '_wpcar_autotime_limit', $disable_timer);
