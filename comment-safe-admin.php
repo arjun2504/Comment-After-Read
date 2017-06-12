@@ -8,10 +8,10 @@ class CommentSafeAdmin {
 
 	public function wpcar_add_menu() {
 		add_options_page(
-			'Comment After Read Settings', 
-			'Comment After Read', 
+			'CommentSafe Settings', 
+			'CommentSafe', 
 			'manage_options', 
-			'comment-after-read-settings', 
+			'comment-safe-settings', 
 			array($this, 'settings_page') 
 			);
 
