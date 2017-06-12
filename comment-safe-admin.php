@@ -21,18 +21,12 @@ class CommentSafeAdmin {
 	}
 
 	public function add_post_specific_box() {
-		$screen = get_post_types();
-
-		foreach( $screens as $screen ) {
-			add_meta_box(
-	            '_wpcar_box',
-	            __( 'Comment Timer', '_wpcar_box' ),
-	            array($this, 'post_specific_box'),
-	            $screen,
-	            'side',
-	            'high'
-	        );
-		}
+		
+		add_meta_box(
+            '_wpcar_box',
+            __( 'Comment Timer', '_wpcar_box' ),
+            array($this, 'post_specific_box')
+        );
 	}
 
 	public function post_specific_box( $post ) {
@@ -76,7 +70,7 @@ class CommentSafeAdmin {
 	public function settings_page() {
 		?>
 		<div class="wrap">
-			<h1>Comment After Read</h1>
+			<h1>CommentSafe</h1>
 			<form method="post" action="options.php">
 			<?php
 				settings_fields("wpcar_section");
