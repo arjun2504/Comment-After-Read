@@ -1,8 +1,8 @@
 <?php
 /**
-* Plugin Name: Comment After Read
-* Description: Lets readers to comment on your posts only after a certain amount of time. Plugin from <a href="https://www.cryptlife.com">CryptLife</a> and <a href="http://invuil.com">Invuil</a>.
-* Author: Arjun, Avinash
+* Plugin Name: CommentSafe
+* Description: Stop spam comments & bot comments. It improves your bounce rate and ultimately helps in better SEO. Subsequent versions will be more on SEO. Developers: Avinash Mishra & Arjun R R. You can donate us for appreciation.
+* Author: Inviul & CryptLife
 * Version: 1.0
 * License: GPL2
 */
@@ -14,6 +14,7 @@ class CommmentAfterRead {
 	private $defaultSettings = [];
 	private $word_count = 0;
 	public $options;
+	private $post_id;
 
 	public function __construct() {
 		$this->defaultSettings['wpm'] = 275;
@@ -57,12 +58,26 @@ class CommmentAfterRead {
 		
 		$option = $this->options;
 		
-		$reading_time = ( $option->get_auto_time_limit_status() != '1' && $auto_reading_time > $option->get_max_time_limit() ) ? $option->get_max_time_limit() : $auto_reading_time;
+		$post_meta_disable_timer = get_post_meta( $this->post_id, '_wpcar_autotime_limit', true);
+		$post_meta_max_limit = get_post_meta( $this->post_id, '_wpcar_maxtime_limit', true);
+
+		if(empty($post_meta_max_limit) && empty($post_meta_disable_timer)) {
+			$reading_time = ( $option->get_auto_time_limit_status() != '1' && $auto_reading_time > $option->get_max_time_limit() ) ? $option->get_max_time_limit() : $auto_reading_time;
+		}
+		else {
+			//overriding global settings
+			$reading_time = ( $post_meta_disable_timer != '1' && $auto_reading_time > $post_meta_max_limit ) ? $post_meta_max_limit : $auto_reading_time;
+		}
 
 		return $reading_time;
 	}
 
 	public function is_single_post( $content ) {
+
+		global $post;
+
+		$this->post_id = $post->ID;
+
 		$this->is_single = is_single() ? true : false;
 		$this->word_count = str_word_count( strip_tags( $content ) );
 
