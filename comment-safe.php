@@ -29,6 +29,25 @@ class CommmentSafe {
 		wp_enqueue_script('wpcar');
 
 		add_filter( 'comment_form_defaults', array($this,'get_timers') );
+
+		add_action( 'comment_form_logged_in_after', array($this, 'init_timer_client_side') );
+		add_action( 'comment_form_after_fields', array($this, 'init_timer_client_side') );
+		add_filter( 'preprocess_comment', array($this, 'verify_timer_after_comment') );
+	}
+
+
+	public function init_timer_client_side() {
+		echo "<input type='hidden' name='_wpcar_init_timer' value='".base64_encode($this->get_reading_time()."|".time())."'>";
+	}
+
+	public function verify_timer_after_comment( $commentdata ) {
+		$timer = explode("|", base64_decode($_POST['_wpcar_init_timer']));
+		$time_to_comment = $timer[0];
+		$page_loaded_at = $timer[1];
+		if((time() - $page_loaded_at) < $time_to_comment) {
+			wp_die( __( 'Error: Please read the article before you comment.' ) );
+		}
+		return $commentdata;
 	}
 
 	public function get_timers( $args ) {
