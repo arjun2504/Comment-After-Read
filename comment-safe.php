@@ -3,7 +3,7 @@
 * Plugin Name: CommentSafe
 * Description: Stop spam comments & bot comments. It improves your bounce rate and ultimately helps in better SEO. Subsequent versions will be more on SEO. Developers: Avinash Mishra & Arjun R R. You can donate us for appreciation.
 * Author: Inviul & CryptLife
-* Version: 1.0
+* Version: 1.1
 * License: GPL2
 */
 include("comment-safe-admin.php");
