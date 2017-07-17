@@ -8,11 +8,11 @@ jQuery(document).ready(function() {
 	wpcar_disableTimer();
 
 	var wpcar_buttonText = jQuery(wpcar_post_comment_button).val();
-	
-	if(wpcar_buttonText != null) {
+	//console.log(wpcar_buttonText);
+	/*if(wpcar_buttonText != null) {
 		wpcar_waitSeconds = wpcar_buttonText.match(/\d+/)[0];
 	}
-	
+	*/
 	setInterval(function() {
 		
 		jQuery(wpcar_post_comment_button).val("Please wait for " + wpcar_waitSeconds + " seconds to comment");
